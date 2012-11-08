@@ -39,15 +39,15 @@ if !exists("b:current_syntax")
 
     syntax keyword phpNull null contained
 
-    syntax match phpInteger "\%(0\|[1-9][0-9]*\)" contained display
-    syntax match phpInteger "0x[0-9a-f]\+" contained display
+    syntax match phpInteger "\%(0\|[1-9]\d*\)" contained display
+    syntax match phpInteger "0x[[:digit:]a-f]\+" contained display
     syntax match phpInteger "0[0-7]\+" contained display
 
-    syntax match phpFloat "[0-9]\+\.[0-9]*" contained display
-    syntax match phpFloat "[0-9]*\.[0-9]\+" contained display
-    syntax match phpFloat "[0-9]\+e[+-]\?[0-9]\+" contained display
-    syntax match phpFloat "[0-9]\+\.[0-9]*e[+-]\?[0-9]\+" contained display
-    syntax match phpFloat "[0-9]*\.[0-9]\+e[+-]\?[0-9]\+" contained display
+    syntax match phpFloat "\d\+\.\d*" contained display
+    syntax match phpFloat "\d*\.\d\+" contained display
+    syntax match phpFloat "\d\+e[+-]\?\d\+" contained display
+    syntax match phpFloat "\d\+\.\d*e[+-]\?\d\+" contained display
+    syntax match phpFloat "\d*\.\d\+e[+-]\?\d\+" contained display
 
     syntax keyword phpOperator and contained
     syntax keyword phpOperator or contained
@@ -105,12 +105,12 @@ if !exists("b:current_syntax")
 
     syntax case ignore
 
-    syntax match phpIdentifier "[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*" contained
+    syntax match phpIdentifier "[[:alpha:]_\x7f-\xff][[:alpha:][:digit:]_\x7f-\xff]*" contained
 
     syntax match phpVariableSelector  "\$" contained display
-    syntax match phpVariable "\$\%(\_s*\$\)*[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*" contained contains=phpVariableSelector
+    syntax match phpVariable "\$\%(\_s*\$\)*[[:alpha:]_\x7f-\xff][[:alpha:][:digit:]_\x7f-\xff]*" contained contains=phpVariableSelector
     syntax region phpVariable matchgroup=phpVariable start="\$\%(\_s*\$\)*\_s*{" end="}" contained contains=phpVariableSelector
-    syntax match phpVariable "\$\%(\_s*\$\)*[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*" contained contains=phpVariableSelector
+    syntax match phpVariable "\$\%(\_s*\$\)*[[:alpha:]_\x7f-\xff][[:alpha:][:digit:]_\x7f-\xff]*" contained contains=phpVariableSelector
 
     syntax keyword phpIf if else elseif endif contained
 
@@ -130,7 +130,7 @@ if !exists("b:current_syntax")
     syntax region phpNamespaceDefinition start="namespace" matchgroup=phpDelimiter end=";" contained contains=phpNamespaceKeyword,phpNamespace,phpOperator
     syntax region phpNamespaceDefinition start="^\z(\s*\)namespace\s\([^;}]*$\)\@="rs=e-10 matchgroup=phpDelimiter end="^\z1}" contained contains=phpNamespaceKeyword,@phpScriptTopLevelElements fold
     syntax region phpNamespaceImporting start="use" matchgroup=phpDelimiter end=";" contained contains=phpComment,phpNamespaceKeyword,phpNamespace,phpOperator,phpDelimiter fold
-    syntax match phpNamespace "[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*" contained
+    syntax match phpNamespace "[[:alpha:]_\x7f-\xff][[:alpha:][:digit:]_\x7f-\xff]*" contained
     syntax keyword phpNamespaceKeyword namespace use as contained
 
     syntax keyword phpEncapsulation public private protected final contained
