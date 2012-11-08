@@ -3,13 +3,14 @@ php.vim
 # Vim syntax file for PHP
 
 Yet another PHP syntax file for [VIM](http://www.vim.org).  
-It's a light syntax file because there is:
+It's a light syntax file because there are:
 
 * No support for PHP native functions
 * No support for PHP native classes
 * No support for PHP native interfaces
 * No support for PHP native constants
 * No support for PHP short tags, ie `<?` and `?>`
+* No support for other syntax like HTML, JavaScript or SQL.
 
 In order to use it, just put it in your `.vim/syntax` directory.  
 It can be used only with [VIM](http://www.vim.org) ≥ 7.
