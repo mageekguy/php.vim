@@ -75,7 +75,7 @@ if !exists("b:current_syntax")
     syntax match phpOperator "@" contained display
     syntax match phpOperator "\\" contained display
 
-    syntax match phpAnnotation "@.\+$" contained containedin=phpComment
+    syntax region phpAnnotation start="@" end="\*/"me=s-1 end="$" contained containedin=phpComment
     syntax keyword phpTodo todo fixme xxx contained containedin=phpComment
     syntax region phpComment start="/\*" end="\*/" fold contained
     syntax match phpComment "\%(#\|//\).\{-}\%(?>\|$\)\@=" contained
