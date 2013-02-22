@@ -8,9 +8,13 @@ if !exists("b:current_syntax")
   if version < 700
     echomsg 'VIM version >= 7 is required by php.vim syntax file'
   else
-    if exists("php_highlight_html") && php_highlight_html
+    if exists("g:php_highlight_html") && g:php_highlight_html
       runtime! syntax/html.vim
       unlet b:current_syntax
+    endif
+
+    if (&filetype != 'php')
+      setlocal filetype=php
     endif
 
     setlocal commentstring-=/*%s*/
@@ -27,7 +31,7 @@ if !exists("b:current_syntax")
 
     syntax match phpEscapeDollard "\\\$" contained
 
-    if exists("php_highlight_html")
+    if exists("g:php_highlight_html") && g:php_highlight_html
       syntax region phpString matchgroup=phpDelimiter start='"' skip='\\.' end='"' contained contains=@htmlTop,phpEscapeDollard,phpVariable
       syntax region phpString matchgroup=phpDelimiter start="'" skip="\\." end="'" contained contains=@htmlTop
     else
